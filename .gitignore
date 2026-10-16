@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Env files (never commit real secrets/URLs beyond .env.example)
+.env
+.env.local
+.env.*.local
+
+# Editor/OS specific files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Vercel CLI link/state and TypeScript incremental build info
+.vercel
+*.tsbuildinfo
+
+# Vite cache
+.vite/
+# Visual Studio cache/options
+.vs/

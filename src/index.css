@@ -1,0 +1,91 @@
+/* File: index.css
+   Purpose: Tailwind v4 CSS-first configuration — design tokens live here
+   directly via @theme, no tailwind.config.js (TOOLS.md, "Tailwind CSS v4";
+   ARCHITECTURE.md section 3.2).
+   Design: one fixed dark theme (no light/dark toggle — this app was never
+   asked to support one). A near-black, cinema-dark canvas with a single
+   warm gold accent reserved for primary actions and the one place per
+   screen that should draw the eye; status is read through small, muted,
+   semantic colors, never through the accent itself, so the two never
+   compete. Bricolage Grotesque carries headings and the wordmark; Manrope
+   carries everything read at UI size — distinct enough from each other
+   and from the generic Inter-everywhere default. */
+
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* Surfaces */
+  --color-canvas: #121214;
+  --color-surface: #1a1b1f;
+  --color-surface-raised: #212227;
+  --color-border: #2b2c31;
+
+  /* Text */
+  --color-ink: #f3f2ee;
+  --color-ink-muted: #9c9b96;
+  --color-ink-faint: #6b6a67;
+
+  /* The one accent — spent on primary actions, active nav, focus rings,
+     upload progress. Never used for status. */
+  --color-accent: #e4a73b;
+  --color-accent-hover: #eeb752;
+  --color-accent-ink: #1a1206;
+
+  /* Status — muted and semantic, deliberately quieter than the accent so
+     a grid of video cards never competes visually with the one gold CTA. */
+  --color-status-pending: #86847d;
+  --color-status-queued: #8b93a8;
+  --color-status-processing: #5b9bd5;
+  --color-status-ready: #4fae7e;
+  --color-status-failed: #d9635c;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.875rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  /* Visible keyboard focus everywhere, styled once instead of per-element. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
